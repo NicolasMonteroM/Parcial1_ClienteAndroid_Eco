@@ -11,18 +11,11 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.Socket;
-
 public class MainActivity extends AppCompatActivity implements OnMessageListener {
 
     private Button confirmBtn, previewBtn;
     private TextView reminderTxtInput, xPosInput, yPosInput;
     private View lowImpBtn, mediumImpBtn, highImpBtn;
-    private boolean previewMode;
     private int impLevel;
 
     private TCPSingleton tcpSingleton;
@@ -48,58 +41,38 @@ public class MainActivity extends AppCompatActivity implements OnMessageListener
 
         confirmBtn.setOnClickListener(
                 (v) -> {
-                    createReminder();
+                    if (validateCompletion()) {
+                        sendInfo(0);
+                        clearReminderForm();
+                    }
                 }
         );
 
         previewBtn.setOnClickListener(
                 (v) -> {
-                    createPreview();
+                    if (validateCompletion()) {
+                        // Sending "1" to make a preview on server
+                        sendInfo(1);
+                    }
                 }
         );
     }
 
-    // <–– Get and send reminder's info to create a preview ––>
-    public void createPreview() {
+    public void sendInfo(int i) {
 
-        previewMode = true;
+        String reminder = reminderTxtInput.getText().toString();
+        int posX = Integer.parseInt(xPosInput.getText().toString());
+        int posY = Integer.parseInt(yPosInput.getText().toString());
 
-        if (validateCompletion() && previewMode) {
-            String reminder = reminderTxtInput.getText().toString();
-            int posX = Integer.parseInt(xPosInput.getText().toString());
-            int posY = Integer.parseInt(yPosInput.getText().toString());
-            String reminderInfo = posX + "," + posY + "," + reminder + "," + impLevel + "," + "1";
+        // The "i" states if it's a preview or not
+        String reminderInfo = posX + "," + posY + "," + reminder + "," + impLevel + "," + i;
 
-            Log.e("Reminder ", reminderInfo);
-            Gson gson = new Gson();
+        Log.e("Reminder ", reminderInfo);
+        Gson gson = new Gson();
 
-            String msg = gson.toJson(reminderInfo);
+        String msg = gson.toJson(reminderInfo);
 
-            tcpSingleton.sendMessage(msg);
-        }
-    }
-
-    // <–– Get and send reminder's info to make a reminder ––>
-    public void createReminder() {
-
-        previewMode = false;
-
-        if (validateCompletion() && previewMode == false) {
-            String reminder = reminderTxtInput.getText().toString();
-            int posX = Integer.parseInt(xPosInput.getText().toString());
-            int posY = Integer.parseInt(yPosInput.getText().toString());
-
-            String reminderInfo = posX + "," + posY + "," + reminder + "," + impLevel + "," + "0";
-
-            Log.e("Reminder ", reminderInfo);
-            Gson gson = new Gson();
-
-            String msg = gson.toJson(reminderInfo);
-
-            tcpSingleton.sendMessage(msg);
-            clearReminderForm();
-
-        }
+        tcpSingleton.sendMessage(msg);
     }
 
     public void setImportance() {
@@ -136,44 +109,28 @@ public class MainActivity extends AppCompatActivity implements OnMessageListener
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                if (impLevel == 0) {
-                    runOnUiThread(
-                            () -> {
-                                lowImpBtn.setBackgroundResource(R.drawable.greenbutton_inactive);
-                                mediumImpBtn.setBackgroundResource(R.drawable.yellowbutton_inactive);
-                                highImpBtn.setBackgroundResource(R.drawable.redbutton_inactive);
-                            }
-                    );
-                } else if (impLevel == 1) {
-                    runOnUiThread(
-                            () -> {
+
+                runOnUiThread(
+                        () -> {
+                            if (impLevel == 1) {
                                 lowImpBtn.setBackgroundResource(R.drawable.greenbutton_active);
-                                mediumImpBtn.setBackgroundResource(R.drawable.yellowbutton_inactive);
-                                highImpBtn.setBackgroundResource(R.drawable.redbutton_inactive);
-                            }
-                    );
-                } else if (impLevel == 2) {
-
-                    runOnUiThread(
-                            () -> {
+                            } else if (impLevel != 1) {
                                 lowImpBtn.setBackgroundResource(R.drawable.greenbutton_inactive);
+                            }
+                            if (impLevel == 2) {
                                 mediumImpBtn.setBackgroundResource(R.drawable.yellowbutton_active);
+                            } else if (impLevel != 2) {
+                                mediumImpBtn.setBackgroundResource(R.drawable.yellowbutton_inactive);
+                            }
+                            if (impLevel == 3) {
+                                highImpBtn.setBackgroundResource(R.drawable.redbutton_active);
+                            } else if (impLevel != 3) {
                                 highImpBtn.setBackgroundResource(R.drawable.redbutton_inactive);
                             }
-                    );
-
-                } else if (impLevel == 3) {
-                    runOnUiThread(
-                            () -> {
-                                lowImpBtn.setBackgroundResource(R.drawable.greenbutton_inactive);
-                                mediumImpBtn.setBackgroundResource(R.drawable.yellowbutton_inactive);
-                                highImpBtn.setBackgroundResource(R.drawable.redbutton_active);
-                            }
-                    );
-                }
+                        });
             }
-
         }).start();
+
     }
 
     public boolean validateCompletion() {
