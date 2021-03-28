@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginTop="8dp"
+        android:text="Alta"
+        android:textAlignment="center"
+        android:textColor="#65434343"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/highImpBtn"
+        app:layout_constraintStart_toStartOf="@+id/highImpBtn"
+        app:layout_constraintTop_toBottomOf="@+id/highImpBtn" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="70dp"
+        android:text="Nuevo recordatorio"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="Importancia"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/confirmBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#534EE1"
+        android:text="Confirmar"
+        app:layout_constraintBottom_toBottomOf="@+id/previewBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/previewBtn"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/previewBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#818181"
+        android:text="Previsualizar"
+        app:layout_constraintEnd_toStartOf="@+id/confirmBtn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reminderTxtInput" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:text="Recordatorio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/xPosInput" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:text="Posición en el mural"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <View
+        android:id="@+id/lowImpBtn"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/greenbutton_inactive"
+        app:layout_constraintCircleRadius="15dp"
+        app:layout_constraintEnd_toStartOf="@+id/mediumImpBtn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <View
+        android:id="@+id/highImpBtn"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/redbutton_inactive"
+        app:layout_constraintBottom_toBottomOf="@+id/lowImpBtn"
+        app:layout_constraintCircleRadius="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/mediumImpBtn"
+        app:layout_constraintTop_toTopOf="@+id/lowImpBtn" />
+
+    <View
+        android:id="@+id/mediumImpBtn"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/yellowbutton_inactive"
+        app:layout_constraintBottom_toBottomOf="@+id/lowImpBtn"
+        app:layout_constraintCircleRadius="15dp"
+        app:layout_constraintEnd_toStartOf="@+id/highImpBtn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/lowImpBtn"
+        app:layout_constraintTop_toTopOf="@+id/lowImpBtn" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginTop="8dp"
+        android:text="Media"
+        android:textAlignment="center"
+        android:textColor="#65434343"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/mediumImpBtn"
+        app:layout_constraintStart_toStartOf="@+id/mediumImpBtn"
+        app:layout_constraintTop_toBottomOf="@+id/mediumImpBtn" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginTop="8dp"
+        android:text="Baja"
+        android:textAlignment="center"
+        android:textColor="#65434343"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/lowImpBtn"
+        app:layout_constraintStart_toStartOf="@+id/lowImpBtn"
+        app:layout_constraintTop_toBottomOf="@+id/lowImpBtn" />
+
+    <EditText
+        android:id="@+id/xPosInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/edittextback"
+        android:ems="10"
+        android:hint="X"
+        android:inputType="number"
+        android:padding="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/yPosInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <EditText
+        android:id="@+id/reminderTxtInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/edittextback"
+        android:ems="10"
+        android:hint="Escribe el texto de tu recordatorio"
+        android:inputType="text"
+        android:nestedScrollingEnabled="false"
+        android:padding="20dp"
+        android:singleLine="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <EditText
+        android:id="@+id/yPosInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/edittextback"
+        android:ems="10"
+        android:hint="Y"
+        android:inputType="number"
+        android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/xPosInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/xPosInput"
+        app:layout_constraintTop_toTopOf="@+id/xPosInput" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
